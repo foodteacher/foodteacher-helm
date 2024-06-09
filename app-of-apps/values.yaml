@@ -1,0 +1,26 @@
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/foodteacher/devops.git
+    targetRevision: main
+
+applications:
+  - name: foodteacher-be
+  - name: foddteacher-fe
+  - name: foodteacher-db
+  - name: foodteacher-efk
+  - name: foodteacher # ingress, cluster-issuer
+
+argocd:
+  applications:
+    - name: foodteacher-be
+      namespace: be
+    - name: foodteacher-fe
+      namespace: fe
+    - name: foodteacher-db
+      namespace: default
+    - name: foodteacher-efk
+      namespace: default
+    - name: foodteachers
+      namespace: default

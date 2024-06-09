@@ -1,0 +1,92 @@
+argocd:
+  applications:
+    - name: foodteacher-be
+      namespace: be
+      server: https://kubernetes.default.svc
+      repoURL: https://github.com/foodteacher/devops.git
+      path: /apps/foodteacher-be
+      targetRevision: HEAD
+      syncOptions:
+        - CreateNamespace=true
+    - name: foodteacher-fe
+      namespace: fe
+      server: https://kubernetes.default.svc
+      repoURL: https://github.com/foodteacher/devops.git
+      path: /apps/foodteacher-fe
+      targetRevision: HEAD
+      syncOptions:
+        - CreateNamespace=true
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/acme-challenge-type: http01
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/server-alias: www.foodteacher.xyz
+    className: nginx
+  host:
+    list:
+      - host: "foodteacher.xyz"
+        service:
+          name: "fe-external"
+          port: 80
+      - host: "v2.foodteacher.xyz"
+        service:
+          name: "fe-2-external"
+          port: 80
+      - host: "api.foodteacher.xyz"
+        service:
+          name: "be-external"
+          port: 80
+      - host: "api2.foodteacher.xyz"
+        service:
+          name: "be-2-external"
+          port: 80
+      - host: "logs.foodteacher.xyz"
+        service:
+          name: "log-external"
+          port: 5601
+      - host: "monitor.foodteacher.xyz"
+        service:
+          name: "fg-external"
+          port: 80
+      - host: "mysql-service"
+        service:
+          name: "mysql-service"
+          port: 3306
+
+
+  tls:
+  - hosts:
+    - foodteacher.xyz
+    - logs.foodteacher.xyz
+    - www.foodteacher.xyz
+    - api.foodteacher.xyz
+    - monitor.foodteacher.xyz
+    - v2.foodteacher.xyz
+    - api2.foodteacher.xyz
+    - v2-dev.foodteacher.xyz
+    - api2-dev.foodteacher.xyz
+    - argo.foodteacher.xyz
+    secretName: foodteacher-tls
+
+
+externalSvc:
+  list:
+    - name: be-external
+      externalName: be.be.svc.cluster.local
+    - name: be-2-external
+      externalName: be-2.be.svc.cluster.local
+    - name: be-dev-external
+      externalName: be-dev.be.svc.cluster.local
+    - name: fe-external
+      externalName: fe.fe.svc.cluster.local
+    - name: fe-2-external
+      externalName: fe-2.fe.svc.cluster.local
+    - name: fe-dev-external
+      externalName: fe-dev.fe.svc.cluster.local
+    - name: fg-external
+      externalName: prometheus-grafana.monitoring.svc.cluster.local
+    - name: log-external
+      externalName:  kibana-svc.efk.svc.cluster.local

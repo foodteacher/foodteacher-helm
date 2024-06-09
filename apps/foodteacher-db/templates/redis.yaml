@@ -1,0 +1,35 @@
+# templates/redis-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: {{ .Values.redis.image }}
+          command: ["redis-server", "/etc/redis/redis.conf"]
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/redis
+            - name: data-volume
+              mountPath: {{ .Values.redis.volumeMountPath }}
+          ports:
+            - containerPort: 6379
+      volumes:
+        - name: config-volume
+          configMap:
+            name: redis-config
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.redis.pvc.name }}

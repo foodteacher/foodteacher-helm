@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: efk
+  name: kibana-config
+  labels:
+    app: kibana
+data:
+  kibana.yml: |-
+    server.host: 0.0.0.0
+    elasticsearch.hosts: http://elasticsearch-svc.efk.svc.cluster.local:9200

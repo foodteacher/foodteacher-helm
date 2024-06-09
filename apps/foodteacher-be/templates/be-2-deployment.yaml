@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: be-2
+  name: be-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: be-2
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: be-2
+    spec:
+      imagePullSecrets:
+      - name: be-regcred
+      containers:
+      - image: "{{ .Values.v2_image.repository }}:{{ .Values.v2_image.tag }}"
+        name: be-2
+        ports: # 컨테이너가 개방할 포트 정의. 정의 안하면 자동 할당
+        - containerPort: 8000
+        env: # 컨테이너 환경 변수
+        - name: OPENAI_API_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: be-configmap
+              key: OPENAI_API_KEY

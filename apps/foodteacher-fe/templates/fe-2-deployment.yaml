@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fe-2
+  name: fe-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fe-2
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: fe-2
+    spec:
+      imagePullSecrets:
+      - name: fe-regcred
+      containers:
+      - image: "{{ .Values.v2_image.repository }}:{{ .Values.v2_image.tag }}"
+        name: fe-2
+        ports: # 컨테이너가 개방할 포트 정의. 정의 안하면 자동 할당
+        - containerPort: 3000

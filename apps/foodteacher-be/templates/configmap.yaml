@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  ENVIRONMENT: production
+  OPENAI_API_KEY: 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
+kind: ConfigMap
+metadata:
+  name: be-configmap

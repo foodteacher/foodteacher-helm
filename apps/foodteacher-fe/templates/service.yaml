@@ -1,0 +1,19 @@
+{{- range .Values.service.list }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}
+  labels:
+    app: {{ .name }}
+spec:
+  type: {{ .type }}
+  ports:
+    - port: {{ .port }}
+      targetPort: {{ .targetport }}
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ .name }}
+---
+{{- end }}
+

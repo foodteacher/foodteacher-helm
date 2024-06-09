@@ -1,0 +1,12 @@
+ {{- range .Values.externalSvc.list }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .name }}
+spec:
+  externalName: {{ .externalName }}
+  internalTrafficPolicy: Cluster
+  sessionAffinity: None
+  type: ExternalName
+---
+{{- end }}

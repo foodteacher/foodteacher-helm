@@ -1,0 +1,38 @@
+# templates/mysql-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: {{ .Values.mysql.image }}
+          volumeMounts:
+            - name: config-volume
+              mountPath: {{ .Values.mysql.volumeMountPath }}
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.mysql.rootPasswordSecret }}
+                  key: password
+          ports:
+            - containerPort: 3306
+      volumes:
+        - name: config-volume
+          configMap:
+            name: mysql-config
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.mysql.pvc.name }}

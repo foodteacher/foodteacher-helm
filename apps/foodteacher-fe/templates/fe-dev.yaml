@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fe-dev
+  name: fe-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fe-dev
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: fe-dev
+    spec:
+      imagePullSecrets:
+      - name: fe-regcred
+      containers:
+      - image: "{{ .Values.dev_image.repository }}:{{ .Values.dev_image.tag }}"
+        name: fe-dev
+        ports: # 컨테이너가 개방할 포트 정의. 정의 안하면 자동 할당
+        - containerPort: 3000ß

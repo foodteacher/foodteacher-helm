@@ -1,0 +1,55 @@
+# devops/charts/db/values.yaml
+mysql:
+  image: mysql:8.0.26
+  rootPasswordSecret: mysql-root-password
+  volumeMountPath: /etc/mysql/conf.d
+  pvc:
+    name: mysql-pvc
+  config: |
+    [mysqld]
+    max_connections = 600
+    read_buffer_size = 1048576
+    net_read_timeout = 360
+    net_write_timeout = 360
+    skip-external-locking
+    skip-host-cache
+    skip-name-resolve
+    [mysql]
+    bind-address = 0.0.0.0
+
+redis:
+  image: redis:6.2.5
+  volumeMountPath: /data
+  pvc:
+    name: redis-pvc
+  config: |
+    maxmemory 20mb
+    maxmemory-policy allkeys-lru
+    
+secret:
+  name: mysql-pw
+  type: Opaque
+  data:
+    password: Zm9vZHRlYWNoZXIxMjM=
+
+pv:
+  name: pv1
+  storageClassName: local-storage
+  capacity: 50Gi
+  accessModes: ReadWriteMany
+  hostPath: /mnt/db
+
+pvc:
+  name: pvc1
+  storageClassName: local-storage
+  accessModes: ReadWriteMany
+  resources:
+    requests:
+      storage: 50Gi
+
+service:
+  name: mysql-service
+  port: 3306
+  targetPort: 3306
+  type: LoadBalancer
+

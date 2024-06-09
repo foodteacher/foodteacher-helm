@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kibana
+  labels:
+    app: kibana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kibana
+  template:
+    metadata:
+      labels:
+        app: kibana
+    spec:
+      containers:
+      - name: kibana
+        image: elastic/kibana:7.2.0
+        env:
+        - name: SERVER_NAME
+          value: "kibana.kubenetes.example.com"
+        - name: ELASTICSEARCH_HOSTS
+          value: "http://elasticsearch-svc.efk.svc.cluster.local:9200"
+        ports:
+        - containerPort: 5601
+        volumeMounts:
+        - name: config
+          mountPath: /usr/share/kibana/config/kibana.yml
+          readOnly: true
+          subPath: kibana.yml
+      volumes:
+      - name: config
+        configMap:
+          name: kibana-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: kibana
+  name: kibana-svc
+  namespace: efk
+spec:
+  ports:
+  - nodePort: 30561
+    port: 5601
+    protocol: TCP
+    targetPort: 5601
+  selector:
+    app: kibana
+  type: NodePort
+

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: be
+  name: be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: be
+  strategy: 
+    type:  # RollingUpdate 전략 사용
+      rollingUpdate:
+        maxSurge: 1 # 동시에 추가되는 최대 Pod 수
+        maxUnavailable: 1 # 유지 보수 중에 동시에 사용할 수 없는 최대 Pod 수
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: be
+    spec:
+      imagePullSecrets:
+      - name: be-regcred
+      containers:
+      - image: "{{ .Values.v1_image.repository }}:{{ .Values.v1_image.tag }}"
+        name: be
+        ports: # 컨테이너가 개방할 포트 정의. 정의 안하면 자동 할당
+        - containerPort: 8000
+        env: # 컨테이너 환경 변수
+        - name: OPENAI_API_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: be-configmap
+              key: OPENAI_API_KEY
+        - name: UVICORN_CMD
+          value: "uvicorn app.main:app --host 0.0.0.0 --port 8000"

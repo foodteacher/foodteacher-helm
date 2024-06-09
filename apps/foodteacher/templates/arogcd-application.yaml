@@ -1,0 +1,26 @@
+# {{- range .Values.argocd.applications }}
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   namespace: argocd
+#   name: {{ .name }}
+# spec:
+#   destination:
+#     namespace: {{ .namespace }}
+#     server: {{ .server }}
+#   project: default
+#   source:
+#     path: {{ .path }}
+#     repoURL: {{ .repoURL }}
+#     targetRevision: {{ .targetRevision }}
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#     {{- range .syncOptions }}
+#     - {{ . }}
+#     {{- end }}
+# ---
+# {{- end }}
+
