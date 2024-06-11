@@ -8,7 +8,7 @@ v1_image:
 v2_image:
   repository: gracehpark/foodteacher-be-2
   pullPolicy: IfNotPresent
-  tag: "cf01803"
+  tag: "cf5f508"
 
 dev_image:
   repository: gracehpark/foodteacher-be-dev
