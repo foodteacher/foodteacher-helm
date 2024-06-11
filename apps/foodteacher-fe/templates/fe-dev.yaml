@@ -20,4 +20,4 @@ spec:
       - image: "{{ .Values.dev_image.repository }}:{{ .Values.dev_image.tag }}"
         name: fe-dev
         ports: # 컨테이너가 개방할 포트 정의. 정의 안하면 자동 할당
-        - containerPort: 3000ß
+        - containerPort: 3000
