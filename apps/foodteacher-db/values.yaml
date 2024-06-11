@@ -1,7 +1,7 @@
 # devops/charts/db/values.yaml
 mysql:
   image: mysql:8.0.26
-  rootPasswordSecret: mysql-root-password
+  rootPasswordSecret: mysql-pw
   volumeMountPath: /etc/mysql/conf.d
   pvc:
     name: mysql-pvc
