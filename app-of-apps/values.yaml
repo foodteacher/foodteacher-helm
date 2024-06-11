@@ -2,7 +2,7 @@ spec:
   destination:
     server: https://kubernetes.default.svc
   source:
-    repoURL: https://github.com/foodteacher/devops.git
+    repoURL: https://github.com/foodteacher/foodteacher-helm.git
     targetRevision: main
 
 applications:
