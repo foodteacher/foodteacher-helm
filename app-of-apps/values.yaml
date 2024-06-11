@@ -21,6 +21,6 @@ argocd:
     - name: foodteacher-db
       namespace: default
     - name: foodteacher-efk
-      namespace: default
+      namespace: efk
     - name: foodteacher
       namespace: default
