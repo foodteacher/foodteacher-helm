@@ -9,11 +9,6 @@ spec:
   selector:
     matchLabels:
       app: fe
-  strategy: 
-    type: RollingUpdate # RollingUpdate 전략 사용
-    rollingUpdate:
-      maxSurge: 1 # 동시에 추가되는 최대 Pod 수
-      maxUnavailable: 1 # 유지 보수 중에 동시에 사용할 수 없는 최대 Pod 수
   template:
     metadata:
       labels:
