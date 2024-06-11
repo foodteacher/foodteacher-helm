@@ -17,19 +17,19 @@ v1_image:
   repository: gracehpark/foodteacher-fe
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 v2_image:
   repository: gracehpark/foodteacher-fe-2
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 dev_image:
   repository: gracehpark/foodteacher-fe-dev
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 dev_image:
   repository:
