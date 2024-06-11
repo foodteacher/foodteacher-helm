@@ -63,10 +63,6 @@ ingress:
         service:
           name: "mysql-service"
           port: 3306
-      - host: "argo.foodteacher.xyz"
-        service:
-          name: "argo-external"
-          port: 443
 
 
   tls:
@@ -80,7 +76,6 @@ ingress:
     - api2.foodteacher.xyz
     - v2-dev.foodteacher.xyz
     - api2-dev.foodteacher.xyz
-    - argo.foodteacher.xyz
     - db.foodteacher.xyz
     secretName: foodteacher-tls
 
@@ -103,5 +98,3 @@ externalSvc:
       externalName: prometheus-grafana.monitoring.svc.cluster.local
     - name: log-external
       externalName:  kibana-svc.efk.svc.cluster.local
-    - name: argo-external
-      externalName:  argocd-server.argocd.svc.cluster.local
