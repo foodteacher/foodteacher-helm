@@ -3,7 +3,6 @@ cd foodteacher-helm
 
 
 # argocd
-
 curl -LO https://github.com/argoproj/argo-cd/releases/download/v1.4.2/argocd-linux-amd64
 chmod u+x argocd-linux-amd64
 sudo mv argocd-linux-amd64 /usr/local/bin/argocd
@@ -30,6 +29,9 @@ kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.6.1/components.yaml
 
 #metric server deployment 의 스펙에 kubelet-insecure-tls 문구 추가해야됨
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
 
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
