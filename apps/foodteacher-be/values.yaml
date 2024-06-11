@@ -4,19 +4,19 @@ v1_image:
   repository: gracehpark/foodteacher-be
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 v2_image:
   repository: gracehpark/foodteacher-be-2
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 dev_image:
   repository: gracehpark/foodteacher-be-dev
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets:
   - name: be-regcred
