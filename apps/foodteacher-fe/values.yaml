@@ -16,7 +16,7 @@ v2_image:
 dev_image:
   repository: gracehpark/foodteacher-fe-dev
   pullPolicy: IfNotPresent
-  tag: "90550a4cef8c35ada6e403b22c944767a273cef8"
+  tag: "8ea9b3a"
 
 
 imageCredentials:
