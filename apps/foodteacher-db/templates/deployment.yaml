@@ -21,6 +21,8 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: {{ .Values.mysql.volumeMountPath }}
+            - name: data-volume
+              mountPath: /var/lib/mysql
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
