@@ -10,7 +10,7 @@ v2_image:
   repository: gracehpark/foodteacher-be-2
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "b859c4c"
+  tag: "cf01803"
 
 dev_image:
   repository: gracehpark/foodteacher-be-dev
