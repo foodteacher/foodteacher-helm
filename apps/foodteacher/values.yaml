@@ -35,6 +35,10 @@ ingress:
         service:
           name: "fe-2-external"
           port: 80
+      - host: "v2-dev.foodteacher.xyz"
+        service:
+          name: "fe-dev-external"
+          port: 80
       - host: "api.foodteacher.xyz"
         service:
           name: "be-external"
@@ -42,6 +46,10 @@ ingress:
       - host: "api2.foodteacher.xyz"
         service:
           name: "be-2-external"
+          port: 80
+      - host: "api2-dev.foodteacher.xyz"
+        service:
+          name: "be-dev-external"
           port: 80
       - host: "logs.foodteacher.xyz"
         service:
@@ -51,10 +59,14 @@ ingress:
         service:
           name: "fg-external"
           port: 80
-      - host: "mysql-service"
+      - host: "db.foodteacher.xyz"
         service:
           name: "mysql-service"
           port: 3306
+      - host: "argo.foodteacher.xyz"
+        service:
+          name: "argo-external"
+          port: 443
 
 
   tls:
@@ -69,6 +81,7 @@ ingress:
     - v2-dev.foodteacher.xyz
     - api2-dev.foodteacher.xyz
     - argo.foodteacher.xyz
+    - db.foodteacher.xyz
     secretName: foodteacher-tls
 
 
@@ -90,3 +103,5 @@ externalSvc:
       externalName: prometheus-grafana.monitoring.svc.cluster.local
     - name: log-external
       externalName:  kibana-svc.efk.svc.cluster.local
+    - name: argo-external
+      externalName:  argocd-server.argocd.svc.cluster.local
