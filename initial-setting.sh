@@ -44,9 +44,8 @@ sudo apt install conntrack -y
 # k9s
 wget https://github.com/derailed/k9s/releases/download/v0.32.4/k9s_Linux_amd64.tar.gz
 tar -zxvf ./k9s_Linux_amd64.tar.gz
-sudo mv ./k9s ~/.local/bin && chmod +x ~/.local/bin/k9s
-echo "export PATH=$PATH:$HOME/.local/bin" >> ~/.bashrc
-source ~/.bashrc
+sudo mv k9s /usr/local/bin/k9s
+
 
 # kubeadm
 
