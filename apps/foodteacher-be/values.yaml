@@ -3,19 +3,16 @@ replicaCount: 1
 v1_image:
   repository: gracehpark/foodteacher-be
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
   tag: "14ff321c10b6cca87bd79dea1dc77cd1ef717025"
 
 v2_image:
   repository: gracehpark/foodteacher-be-2
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
   tag: "cf01803"
 
 dev_image:
   repository: gracehpark/foodteacher-be-dev
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
   tag: "2726fb7579a6d430fb0963d4dcb06b3698286cd1"
 
 imagePullSecrets:
