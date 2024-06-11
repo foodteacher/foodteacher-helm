@@ -40,7 +40,7 @@ pv:
   hostPath: /mnt/db
 
 pvc:
-  name: pvc1
+  name: mysql-pvc
   storageClassName: local-storage
   accessModes: ReadWriteMany
   resources:
