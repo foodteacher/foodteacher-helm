@@ -11,7 +11,7 @@ v1_image:
 v2_image:
   repository: gracehpark/foodteacher-fe-2
   pullPolicy: IfNotPresent
-  tag: "0f05629"
+  tag: "06ddc94"
 
 dev_image:
   repository: gracehpark/foodteacher-fe-dev
