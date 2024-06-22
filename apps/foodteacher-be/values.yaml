@@ -13,7 +13,7 @@ v2_image:
 dev_image:
   repository: gracehpark/foodteacher-be-dev
   pullPolicy: IfNotPresent
-  tag: "2726fb7579a6d430fb0963d4dcb06b3698286cd1"
+  tag: "a8c865f"
 
 imagePullSecrets:
   - name: be-regcred
