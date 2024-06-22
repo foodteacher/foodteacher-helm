@@ -22,9 +22,21 @@ redis:
   volumeMountPath: /data
   pvc:
     name: redis-pvc
+    storageClassName: local-storage
+    accessModes: ReadWriteMany
+    resources:
+      requests:
+        storage: 50Gi
   config: |
     maxmemory 20mb
     maxmemory-policy allkeys-lru
+  pv:
+    name: pv-redis
+    storageClassName: local-storage
+    capacity: 50Gi
+    accessModes: ReadWriteMany
+    hostPath: /mnt/redis
+
     
 secret:
   name: mysql-pw
@@ -48,8 +60,13 @@ pvc:
       storage: 50Gi
 
 service:
-  name: mysql-service
-  port: 3306
-  targetPort: 3306
-  type: LoadBalancer
-
+  - name: mysql-service
+    port: 3306
+    targetPort: 3306
+    type: clientIP
+    app: mysql
+  - name: redis-service
+    port: 6379
+    targetPort: 6379
+    type: clientIP
+    app: redis

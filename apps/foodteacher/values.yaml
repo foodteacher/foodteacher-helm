@@ -63,6 +63,10 @@ ingress:
         service:
           name: "mysql-service"
           port: 3306
+      - host: "redis.foodteacher.xyz"
+        service:
+          name: "redis-service"
+          port: 6379   
 
 
   tls:
@@ -77,6 +81,7 @@ ingress:
     - v2-dev.foodteacher.xyz
     - api2-dev.foodteacher.xyz
     - db.foodteacher.xyz
+    - redis.foodteacher.xyz
     secretName: foodteacher-tls
 
 
