@@ -3,7 +3,7 @@ replicaCount: 1
 v1_image:
   repository: gracehpark/foodteacher-be
   pullPolicy: IfNotPresent
-  tag: "e590249"
+  tag: "87d71b6"
 
 v2_image:
   repository: gracehpark/foodteacher-be-2
